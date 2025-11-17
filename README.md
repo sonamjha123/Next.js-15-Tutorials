@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Prerequisites](#Prerequisites)
-- [Dev Environment](#dev-environment)
+- [Dev Environment](#Dev-environment)
 - [New Next.js Project](#new-nextjs-project)
 - [Understanding Project Architecture](#understanding-project-architecture)
 - [React Server Components](#react-server-components)
@@ -286,3 +286,24 @@ Since data fetching is a major part of building Next.js apps.
 
 ---
 
+## Dev-environment
+<details>
+
+ **npm create next-app@latest my-app**
+* This will install following 
+Installing dependencies:
+- next
+- react
+- react-dom
+
+Installing devDependencies:
+- @tailwindcss/postcss
+- @types/node
+- @types/react
+- @types/react-dom
+- eslint
+- eslint-config-next
+- tailwindcss
+- typescript
+
+</details>
