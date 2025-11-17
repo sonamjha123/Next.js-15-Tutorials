@@ -762,11 +762,11 @@ It’s like saying:
 
 ---
 
-# **2️⃣ Syntax**
+##### **2️⃣ Syntax**
 
 There are two types:
 
-### **a) Regular Catch-All (`[...param]`)**
+##### **a) Regular Catch-All (`[...param]`)**
 
 * Matches **1 or more segments**.
 * Returns an **array** in `params`.
@@ -788,7 +788,7 @@ Matches:
 
 ---
 
-### **b) Optional Catch-All (`[[...param]]`)**
+##### **b) Optional Catch-All (`[[...param]]`)**
 
 * Matches **0 or more segments**.
 * Works even if the segment is missing.
@@ -812,7 +812,7 @@ Matches:
 
 ---
 
-# **3️⃣ How to Use It in Code**
+##### **3️⃣ How to Use It in Code**
 
 Example: `pages/blog/[...slug].js`
 
@@ -841,7 +841,7 @@ export default function BlogPage() {
 
 ---
 
-# **4️⃣ Use Cases**
+##### **4️⃣ Use Cases**
 
 1. **Blog posts with nested categories**
    `/blog/tech/nextjs/intro` → handled by `[...slug].js`
@@ -854,7 +854,7 @@ export default function BlogPage() {
 
 ---
 
-# **5️⃣ Key Points**
+##### **5️⃣ Key Points**
 
 | Feature                  | `[...slug]` | `[[...slug]]`      |
 | ------------------------ | ----------- | ------------------ |
