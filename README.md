@@ -2,8 +2,8 @@
 
 - [Introduction](#introduction)
 - [Prerequisites](#Prerequisites)
-- [ReactServerComponents_(RSC)](#ReactServerComponents_(RSC))
 - [Dev Environment](#Dev-environment)
+- [ReactServerComponents_(RSC)](#ReactServerComponents_(RSC))
 - [New Next.js Project](#new-nextjs-project)
 - [Understanding Project Architecture](#understanding-project-architecture)
 - [React Server Components](#react-server-components)
