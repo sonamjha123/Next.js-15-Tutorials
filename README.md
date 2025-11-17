@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Prerequisites](#Prerequisites)
+- [ReactServerComponents_(RSC)](#ReactServerComponents_(RSC))
 - [Dev Environment](#Dev-environment)
 - [New Next.js Project](#new-nextjs-project)
 - [Understanding Project Architecture](#understanding-project-architecture)
@@ -305,5 +306,104 @@ Installing devDependencies:
 - eslint-config-next
 - tailwindcss
 - typescript
+<Summary>Project File Structure</Summary>
+<details>
+## 1️⃣ `layout.tsx` — **Route Layout**
+
+* **Purpose:** Wraps pages in a consistent structure. Think of it like the **frame** of your route.
+* **Scope:** Applies to all `page.tsx` files inside the same folder or nested subfolders.
+* **Nesting:** Layouts are **nested**, so child layouts can override or extend parent layouts.
+
+**Example structure:**
+
+```
+app/
+  layout.tsx        → root layout (applies to all pages)
+  page.tsx          → homepage
+  dashboard/
+    layout.tsx      → wraps only dashboard pages
+    page.tsx        → /dashboard
+```
+
+**Example layout.tsx:**
+
+```tsx
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <header>My Header</header>
+        <main>{children}</main>
+        <footer>My Footer</footer>
+      </body>
+    </html>
+  );
+}
+```
+
+* The `children` prop automatically renders the corresponding `page.tsx` inside this layout.
+
+---
+
+## 2️⃣ `page.tsx` — **Route Page**
+
+* **Purpose:** Represents the **UI of a specific route**.
+* **Scope:** One `page.tsx` per route.
+* **Placement:** Its **folder location defines the URL path**.
+
+**Example:**
+
+```tsx
+export default function HomePage() {
+  return (
+    <div>
+      <h1>Welcome to Next.js 15!</h1>
+      <p>This is the homepage content.</p>
+    </div>
+  );
+}
+```
+
+* If placed under `app/`, it becomes `/`
+* If placed under `app/dashboard/`, it becomes `/dashboard`
+
+---
+
+### 🔹 How they work together
+
+1. The `layout.tsx` defines the **wrapper** (header, footer, nav).
+2. The `page.tsx` defines the **content** of that route.
+3. Next.js **automatically injects the page into the layout** via the `children` prop.
+
+**Flow:**
+
+```
+layout.tsx
+   └─> children
+         └─> page.tsx content
+```
+
+So, in practice:
+
+* `layout.tsx` = shared structure
+* `page.tsx` = individual route content
 
 </details>
+</details>
+
+### ReactServerComponents_(RSC)
+* React Server Components is a new architecture that was introduced by React team and quickly adopted by Next.js
+* This architecture introduces a new approach to create React components by dividing them into 2 distinct types: 
+* Server Components
+* Client Components  Server Components: 
+* By default Next.js treats all components as Server Components
+* These components can perform server-side tasks like reading files or fetching data directly from database
+* The trade-offs is that they can’t use React hooks or handle user interaction
+
+Client Components: 
+* To create Client Component, you will need to add “use client”  on the top of your component file.
+* While Client component can’t perform server side tasks like reading files but they can use hooks and handle the user interactions.
+* Client components are the traditional React components that we are familiar with in using React  React Server Components & Routing
+* As we get into routing, you will see practical examples of both  types
+* Work with server components that wait for certain operations to complete before rendering the content
+* Use client components to take advantage of hooks from the routing module.
