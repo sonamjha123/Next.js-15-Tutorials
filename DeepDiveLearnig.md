@@ -1,13 +1,13 @@
 
 ## Table of Contents
 
-- [SPA (Single Page Application)](#SPA (Single Page Application))
+- [SPA(Single Page Application)](#SinglePageApplicstion_SPA)
 
 Below is a **clear, detailed, interview-ready explanation of SPA (Single Page Application)** — structured so you can speak confidently and impressively in an interview.
 
 ---
 
-# **SPA (Single Page Application)**
+## SinglePageApplicstion_SPA)
 
 ## **1. What is an SPA?**
 
