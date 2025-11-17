@@ -6,6 +6,7 @@
 - [React Server Components](#react-server-components)
 - [Understanding Project Architecture](#understanding-project-architecture)
 - [Routing](#routing)
+- [NotFoundPage](#NotFoundPage)
 - [Route Handlers](#route-handlers)
 - [Fetching Data](#fetching-data)
 - [Server Actions](#server-actions)
@@ -624,11 +625,11 @@ This shows **nested layouts, dynamic routes, and reusable layouts**.
 5. **Layouts**: App Router allows route-specific layouts; Page Router only global layout.
 6. **Best practice**: Use App Router for **large, modern apps**; Page Router for **small/simple or legacy apps**.
 
-##### Nested Routes
+### Nested Routes
 
-##### Dynamic Routes 
+### Dynamic Routes 
 
-## **1. Typing route parameters (`params`)**
+##### **1. Typing route parameters (`params`)**
 
 In App Router, when you have a dynamic route like:
 
@@ -656,7 +657,7 @@ export default function ProductDetails({
 
 ---
 
-## **2. Async components typing**
+##### **2. Async components typing**
 
 If your component is **async**, TypeScript automatically infers that it returns a `Promise<JSX.Element>`:
 
@@ -676,7 +677,7 @@ export default async function ProductDetails({
 
 ---
 
-## **3. Typing dynamic route arrays (optional)**
+##### **3. Typing dynamic route arrays (optional)**
 
 If you have **catch-all routes** like `[...slug]`:
 
@@ -694,7 +695,7 @@ params: { slug: string[] } // always an array
 
 ---
 
-## **4. Typing fetched data**
+##### **4. Typing fetched data**
 
 When you fetch product details, always type the data:
 
@@ -719,7 +720,7 @@ export default async function ProductDetails({
 
 ---
 
-## **5. Cheat list of TypeScript you should know here**
+##### **5. Cheat list of TypeScript you should know here**
 
 1. **Object types for `params`**
 
@@ -752,7 +753,7 @@ export default async function ProductDetails({
 
 Think of it as **“params are props, fetched data are objects, async components return Promise<JSX>”**. That’s literally all the TypeScript you need to know to be confident in interviews for this pattern.
 
-#### **1️⃣ What is a Catch-All Segment?**
+### What is a Catch-All Segment?
 
 In **Next.js routing**, a **catch-all segment** lets a single route **match multiple nested paths**, instead of defining a separate page for each URL.
 
@@ -867,6 +868,124 @@ export default function BlogPage() {
 Catch-all segments are **very powerful for dynamic nested paths**, which is very common in **metaverse / NFT / multi-level routing apps**.
 
 ---
+## NotFoundPage
+
+#### **1. File location**
+
+Create a file named **`not-found.tsx`** inside the `app` directory (or a specific route folder if you want a route-specific 404):
+
+```
+app/
+└── not-found.tsx
+```
+
+---
+
+#### **2. Example content**
+
+```tsx
+export default function NotFound() {
+  return (
+    <main>
+      <h1>404 - Page Not Found</h1>
+      <p>Sorry, the page you are looking for does not exist.</p>
+    </main>
+  );
+}
+```
+
+---
+
+#### **3. How it works**
+
+* **Next.js automatically renders `not-found.tsx`** when:
+
+  1. A dynamic route returns `notFound()` from a Server Component.
+  2. The user navigates to a URL that does not exist.
+
+* **Optional usage in a dynamic route:**
+
+```ts
+import { notFound } from 'next/navigation';
+
+export default async function ProductPage({ params }: { params: { productId: string } }) {
+  const product = await fetchProduct(params.productId);
+
+  if (!product) {
+    notFound(); // Triggers the `not-found.tsx` page
+  }
+
+  return <div>{product.name}</div>;
+}
+```
+
+---
+
+#### **Key Points**
+
+1. File: `app/not-found.tsx`
+2. Returns **JSX** for 404 page.
+3. Can be **triggered manually** using `notFound()` inside a Server Component.
+4. Automatically shown for unmatched routes if placed in `app/`.
+
+---
+
+### usePathname Hook - handling error messages for multiple routes
+Got it! If you want **one error/Not Found page** but show **different messages based on the route**, here’s the **straightforward approach** in **Next.js 15 App Router** using `usePathname`.
+
+---
+
+## **1. Import `usePathname`**
+
+`usePathname` is a **Next.js hook** from `next/navigation` that gives you the current URL path.
+
+```ts
+import { usePathname } from 'next/navigation';
+```
+
+---
+
+## **2. Example: Dynamic Not Found Page**
+
+```tsx
+'"use client";
+
+import { usePathname } from "next/navigation";
+export default function NotFound() {
+    const pathname = usePathname();
+    const productId = pathname.split("/")[2];   
+    const reviewId = pathname.split("/")[4];
+
+    return (
+        <>
+            <h1>Review {reviewId} of Product {productId} Page Not Found</h1>
+            
+        </>
+    );
+}
+```
+
+---
+
+## **3. How it works**
+
+1. `usePathname()` returns the current URL as a string, e.g. `/products/1`.
+2. You can **conditionally change the message** based on the path.
+3. This allows **one Not Found page** to work for multiple routes.
+4. Remember: `usePathname` works **only in Client Components**, so add `'use client'` at the top.
+
+---
+
+### ✅ **Key Points**
+
+* One `not-found.tsx` can handle **all routes**.
+* `usePathname` lets you **customize the message dynamically**.
+* Must be a **client component** if using `usePathname`.
+* Works well with **dynamic and nested routes**.
+
+---
+
+
 
 
  
