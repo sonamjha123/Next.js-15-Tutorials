@@ -7,7 +7,7 @@ Below is a **clear, detailed, interview-ready explanation of SPA (Single Page Ap
 
 ---
 
-# ⭐ **SPA (Single Page Application)**
+# **SPA (Single Page Application)**
 
 ## **1. What is an SPA?**
 
