@@ -752,5 +752,121 @@ export default async function ProductDetails({
 
 Think of it as **“params are props, fetched data are objects, async components return Promise<JSX>”**. That’s literally all the TypeScript you need to know to be confident in interviews for this pattern.
 
+#### **1️⃣ What is a Catch-All Segment?**
+
+In **Next.js routing**, a **catch-all segment** lets a single route **match multiple nested paths**, instead of defining a separate page for each URL.
+
+It’s like saying:
+
+> “I don’t know how many URL segments there will be, but I want this page to handle them all.”
+
+---
+
+# **2️⃣ Syntax**
+
+There are two types:
+
+### **a) Regular Catch-All (`[...param]`)**
+
+* Matches **1 or more segments**.
+* Returns an **array** in `params`.
+
+Example:
+
+```
+pages/blog/[...slug].js
+```
+
+Matches:
+
+```
+/blog/post-1            → params.slug = ['post-1']
+/blog/2025/11/17/post   → params.slug = ['2025','11','17','post']
+```
+
+> Key: `params.slug` is always an **array** of segments.
+
+---
+
+### **b) Optional Catch-All (`[[...param]]`)**
+
+* Matches **0 or more segments**.
+* Works even if the segment is missing.
+* Returns **undefined** if no segments.
+
+Example:
+
+```
+pages/docs/[[...slug]].js
+```
+
+Matches:
+
+```
+/docs                   → params.slug = undefined
+/docs/getting-started    → params.slug = ['getting-started']
+/docs/2025/11/tutorial   → params.slug = ['2025','11','tutorial']
+```
+
+> Optional catch-all is great for routes like **docs**, where `/docs` and `/docs/something` should use the same page.
+
+---
+
+# **3️⃣ How to Use It in Code**
+
+Example: `pages/blog/[...slug].js`
+
+```javascript
+import { useRouter } from 'next/router';
+
+export default function BlogPage() {
+  const router = useRouter();
+  const { slug } = router.query;
+
+  return (
+    <div>
+      <h1>Blog Page</h1>
+      <p>Slug segments: {slug ? slug.join(' / ') : 'No slug'}</p>
+    </div>
+  );
+}
+```
+
+**Testing:**
+
+```
+/blog/post-1           → Slug segments: post-1
+/blog/2025/11/17/post  → Slug segments: 2025 / 11 / 17 / post
+```
+
+---
+
+# **4️⃣ Use Cases**
+
+1. **Blog posts with nested categories**
+   `/blog/tech/nextjs/intro` → handled by `[...slug].js`
+
+2. **Docs websites**
+   `/docs` or `/docs/guide/setup` → handled by `[[...slug]].js`
+
+3. **Metaverse-style dynamic routing**
+   `/world/zone/area/room` → single page handles all nested paths
+
+---
+
+# **5️⃣ Key Points**
+
+| Feature                  | `[...slug]` | `[[...slug]]`      |
+| ------------------------ | ----------- | ------------------ |
+| Matches                  | 1+ segments | 0+ segments        |
+| Missing segment allowed? | ❌           | ✅                  |
+| `params.slug`            | array       | array or undefined |
+
+---
+
+Catch-all segments are **very powerful for dynamic nested paths**, which is very common in **metaverse / NFT / multi-level routing apps**.
+
+---
+
 
  
