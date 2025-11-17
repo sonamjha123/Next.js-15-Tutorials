@@ -3,10 +3,10 @@
 - [Introduction](#introduction)
 - [Prerequisites](#Prerequisites)
 - [Dev Environment](#Dev-environment)
-- [ReactServerComponents_(RSC)](#ReactServerComponents_(RSC))
+- [React Server Components](#react-server-components)
 - [New Next.js Project](#new-nextjs-project)
 - [Understanding Project Architecture](#understanding-project-architecture)
-- [React Server Components](#react-server-components)
+
 - [Routing](#routing)
 - [Route Handlers](#route-handlers)
 - [Fetching Data](#fetching-data)
@@ -391,7 +391,7 @@ So, in practice:
 </details>
 </details>
 
-### ReactServerComponents_(RSC)
+### react-server-components
 * React Server Components is a new architecture that was introduced by React team and quickly adopted by Next.js
 * This architecture introduces a new approach to create React components by dividing them into 2 distinct types: 
 * Server Components
