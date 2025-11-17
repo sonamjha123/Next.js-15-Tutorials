@@ -417,11 +417,79 @@ So, in practice:
   **When these conventions are followed it becomes automatically available as route.**
   
 ##### Scenarios of creating Routing Files:
- - Scenario 1 : create /Home---> app/page.tsx
- - Scenario 2: create 2 additional routes -->/about, /profile: app>about>page.tsx , app>profile>page.tsx
- - Scenario 3: create nested routes : /blog, /blog/firstpage
- - Scenario 4: Dynamic Routes : /products has 3 Products like Product 1 , Product 2, Product 3, next if we type  **/products/1** - should show     product 1 page content and so on.
- 
+ - **Scenario 1:** create /Home---> app/page.tsx
+ - **Scenario 2:** create 2 additional routes -->/about, /profile: app>about>page.tsx , app>profile>page.tsx
+ - **Scenario 3:** **create nested routes** :` /blog, /blog/firstpage`
+ - **Scenario 4:** **Dynamic Routes** : /products has 3 Products like Product 1 , Product 2, Product 3, next if we type  `/products/1` - should show product 1 page content and so on, `/products/2` - should show product 2 page content and so on, `/products/3` - should show product 3 page content and so on.
+ - **Scenario 5:** **Nested Dynamic Routes**: `/products/1/reviews/1`
+ Here’s a **.md file structure** summarizing your requested Next.js 15 App Router scenarios, **focusing only on folder/file structure**, no code included:
+
+```markdown
+# Next.js 15 App Router - File Structure Examples
+
+## Scenario 1: Home Page
+```
+
+app/
+└── page.tsx
+
+```
+
+---
+
+## Scenario 2: Additional Routes (/about, /profile)
+```
+
+app/
+├── page.tsx        # Home page
+├── about/
+│   └── page.tsx    # About page
+└── profile/
+└── page.tsx    # Profile page
+
+```
+
+---
+
+## Scenario 3: Nested Routes (/blog, /blog/firstpage)
+```
+
+app/
+├── page.tsx        # Home page
+└── blog/
+├── page.tsx        # /blog
+└── firstpage/
+└── page.tsx    # /blog/firstpage
+
+```
+
+---
+
+## Scenario 4: Dynamic Routes (/products/1, /products/2, /products/3)
+```
+
+app/
+└── products/
+├── [productId]/
+│   └── page.tsx    # /products/1, /products/2, /products/3
+
+```
+
+---
+
+## Scenario 5: Nested Dynamic Routes (/products/1/reviews/1)
+```
+
+app/
+└── products/
+├── [productId]/
+│   └── reviews/
+│       └── [reviewId]/
+│           └── page.tsx    # /products/1/reviews/1
+
+```
+```
+
  ###### Expalin Routes based on Example
  Perfect! Let's break this down into a **full, working example** for Next.js 15 App Router, **then summarize with key points** you can use in an interview.
 
@@ -557,5 +625,132 @@ This shows **nested layouts, dynamic routes, and reusable layouts**.
 6. **Best practice**: Use App Router for **large, modern apps**; Page Router for **small/simple or legacy apps**.
 
 ##### Nested Routes
+
+##### Dynamic Routes 
+
+## **1. Typing route parameters (`params`)**
+
+In App Router, when you have a dynamic route like:
+
+```
+app/products/[productId]/page.tsx
+```
+
+Next.js passes **route params** to your component as a prop. TypeScript lets you type them:
+
+```ts
+export default function ProductDetails({
+  params,
+}: {
+  params: { productId: string }; // TypeScript type for route params
+}) {
+  return <p>{params.productId}</p>;
+}
+```
+
+✅ Key points:
+
+* `params` is an object.
+* Keys of `params` correspond to the **dynamic segments** in your file/folder name.
+* Example: `[productId]` → `params.productId`.
+
+---
+
+## **2. Async components typing**
+
+If your component is **async**, TypeScript automatically infers that it returns a `Promise<JSX.Element>`:
+
+```ts
+export default async function ProductDetails({
+  params,
+}: {
+  params: { productId: string };
+}): Promise<JSX.Element> {
+  const product = await fetch(`/api/products/${params.productId}`).then(r => r.json());
+  return <p>{product.name}</p>;
+}
+```
+
+* Async component → return type = `Promise<JSX.Element>`
+* Optional: you can **explicitly type** it, but TS can infer it.
+
+---
+
+## **3. Typing dynamic route arrays (optional)**
+
+If you have **catch-all routes** like `[...slug]`:
+
+```ts
+app/docs/[...slug]/page.tsx
+```
+
+The `params` type looks like this:
+
+```ts
+params: { slug: string[] } // always an array
+```
+
+* Example: `/docs/a/b/c` → `params.slug = ["a","b","c"]`
+
+---
+
+## **4. Typing fetched data**
+
+When you fetch product details, always type the data:
+
+```ts
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+};
+
+export default async function ProductDetails({
+  params,
+}: {
+  params: { productId: string };
+}) {
+  const product: Product = await fetch(`/api/products/${params.productId}`).then(res => res.json());
+  return <p>{product.name} - ${product.price}</p>;
+}
+```
+
+✅ Benefits: TypeScript helps with **autocompletion** and **avoids runtime errors**.
+
+---
+
+## **5. Cheat list of TypeScript you should know here**
+
+1. **Object types for `params`**
+
+   ```ts
+   { productId: string } // simple dynamic route
+   { slug: string[] }    // catch-all route
+   ```
+2. **Async function return type**
+
+   ```ts
+   async function Component(): Promise<JSX.Element>
+   ```
+3. **Typing fetched data**
+
+   ```ts
+   type Product = { id: string; name: string; price: number; }
+   ```
+4. **Optional: typing props**
+
+   ```ts
+   interface Props { params: { productId: string } }
+   export default async function Page({ params }: Props) {}
+   ```
+5. **Type inference**
+   TypeScript can often infer types, especially for async functions in App Router, but explicit types are **better for clarity**.
+
+---
+
+💡 **Memory trick:**
+
+Think of it as **“params are props, fetched data are objects, async components return Promise<JSX>”**. That’s literally all the TypeScript you need to know to be confident in interviews for this pattern.
+
 
  
