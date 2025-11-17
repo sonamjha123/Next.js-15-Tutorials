@@ -870,7 +870,7 @@ Catch-all segments are **very powerful for dynamic nested paths**, which is very
 ---
 ## NotFoundPage
 
-#### **1. File location**
+##### **1. File location**
 
 Create a file named **`not-found.tsx`** inside the `app` directory (or a specific route folder if you want a route-specific 404):
 
@@ -881,7 +881,7 @@ app/
 
 ---
 
-#### **2. Example content**
+##### **2. Example content**
 
 ```tsx
 export default function NotFound() {
@@ -896,7 +896,7 @@ export default function NotFound() {
 
 ---
 
-#### **3. How it works**
+##### **3. How it works**
 
 * **Next.js automatically renders `not-found.tsx`** when:
 
@@ -921,7 +921,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 ---
 
-#### **Key Points**
+##### **Key Points**
 
 1. File: `app/not-found.tsx`
 2. Returns **JSX** for 404 page.
@@ -930,12 +930,12 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 ---
 
-### usePathname Hook - handling error messages for multiple routes
+##### usePathname Hook - handling error messages for multiple routes
 Got it! If you want **one error/Not Found page** but show **different messages based on the route**, here’s the **straightforward approach** in **Next.js 15 App Router** using `usePathname`.
 
 ---
 
-## **1. Import `usePathname`**
+##### **1. Import `usePathname`**
 
 `usePathname` is a **Next.js hook** from `next/navigation` that gives you the current URL path.
 
@@ -945,7 +945,7 @@ import { usePathname } from 'next/navigation';
 
 ---
 
-## **2. Example: Dynamic Not Found Page**
+##### **2. Example: Dynamic Not Found Page**
 
 ```tsx
 '"use client";
