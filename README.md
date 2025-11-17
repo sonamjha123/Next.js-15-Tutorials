@@ -392,15 +392,15 @@ So, in practice:
 </details>
 
 ### react-server-components
-* React Server Components is a new architecture that was introduced by React team and quickly adopted by Next.js
-* This architecture introduces a new approach to create React components by dividing them into 2 distinct types: 
-* Server Components
+**React Server Components is a new architecture that was introduced by React team and quickly adopted by Next.js**
+- This architecture introduces a new approach to create React components by dividing them into 2 distinct types: 
+* **Server Components**
 * Client Components  Server Components: 
 * By default Next.js treats all components as Server Components
 * These components can perform server-side tasks like reading files or fetching data directly from database
 * The trade-offs is that they can’t use React hooks or handle user interaction
 
-Client Components: 
+* **Client Components:**
 * To create Client Component, you will need to add “use client”  on the top of your component file.
 * While Client component can’t perform server side tasks like reading files but they can use hooks and handle the user interactions.
 * Client components are the traditional React components that we are familiar with in using React  React Server Components & Routing
