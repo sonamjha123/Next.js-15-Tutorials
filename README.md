@@ -1,6 +1,7 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Prerequisites](#Prerequisites)
 - [Dev Environment](#dev-environment)
 - [New Next.js Project](#new-nextjs-project)
 - [Understanding Project Architecture](#understanding-project-architecture)
@@ -155,6 +156,133 @@ Next.js handles optimizations automatically:
 | Styling       | Any CSS lib           | Supports all + CSS Modules             | Easier integration                    |
 | Optimization  | Manual                | Automatic                              | Faster pages, code splitting, caching |
 | Build         | CRA/Webpack           | Next.js dev/prod system                | Ready-to-deploy setup                 |
+
+---
+
+### Prerequisites
+
+#### ✔ **1. HTML (HyperText Markup Language)**
+
+**Why it's needed:**
+
+* Next.js applications are ultimately rendered as HTML.
+* You should understand elements, tags, attributes, forms, semantic HTML, accessibility basics.
+
+**Key topics:**
+
+* Headings, paragraphs, lists, images
+* Forms & inputs
+* Semantic tags (`<header>`, `<main>`, `<footer>`, `<section>`)
+* SEO-related tags (`<title>`, `<meta>`)
+
+---
+
+#### ✔ **2. CSS (Cascading Style Sheets)**
+
+**Why it's needed:**
+
+* Next.js supports many styling methods (CSS Modules, Tailwind, styled-components).
+* To style components and layouts effectively.
+
+**Key topics:**
+
+* Flexbox & Grid
+* Responsive design (media queries)
+* CSS Modules
+* Basic animations
+* Tailwind CSS (commonly used in Next.js projects)
+
+---
+
+#### ✔ **3. Modern JavaScript (ES6+ concepts)**
+
+**Why it's needed:**
+
+* Next.js uses modern JS features heavily.
+* You must write functions, handle async operations, work with modules, etc.
+
+**Key topics:**
+
+* Let, const
+* Arrow functions
+* Template literals
+* Destructuring
+* Spread/rest operators
+* Async/await
+* Promises
+* Modules (import/export)
+* Array methods (`map`, `filter`, `reduce`)
+
+---
+
+#### ⭐ **Additional Important Prerequisites (Required in REAL projects)**
+
+#### ✔ **4. React Fundamentals**
+
+Next.js is built on top of React, so you must know:
+
+* Components (functional)
+* Props
+* State (`useState`)
+* Hooks (`useEffect`, `useContext`)
+* JSX
+* Component lifecycle
+* React Router basics (helps understand Next.js routing differences)
+* Event handling
+
+---
+
+#### ✔ **5. Understanding of Client-Server Architecture**
+
+**You should know:**
+
+* How APIs work
+* What is front-end vs backend
+* HTTP methods (GET, POST, PUT)
+* JSON handling
+
+Make sure you understand:
+
+* Fetching data from APIs
+* Client vs server execution
+
+---
+
+#### ✔ **6. Basic Node.js knowledge**
+
+**Next.js runs on Node during SSR/SSG builds, so you should know:**
+
+* What Node.js is
+* Basic npm/yarn commands
+* Environment variables
+* Simple server concepts
+
+You do NOT need advanced backend skills.
+
+---
+
+#### ✔ **7. Git & GitHub (Version control)**
+
+* Branching
+* Committing
+* Pull requests
+* Cloning/pushing
+
+#### ⭐ Optional (But Very Helpful)
+
+##### ✔ TypeScript basics
+
+**Next.js has first-class TypeScript support. Knowing:**
+
+* Types
+* Interfaces
+* Props typing
+* API response typing
+  will make you much more professional.
+
+##### ✔ Familiarity with REST APIs or GraphQL
+
+Since data fetching is a major part of building Next.js apps.
 
 ---
 
