@@ -4,9 +4,7 @@
 - [Prerequisites](#Prerequisites)
 - [Dev Environment](#Dev-environment)
 - [React Server Components](#react-server-components)
-- [New Next.js Project](#new-nextjs-project)
 - [Understanding Project Architecture](#understanding-project-architecture)
-
 - [Routing](#routing)
 - [Route Handlers](#route-handlers)
 - [Fetching Data](#fetching-data)
@@ -395,15 +393,25 @@ So, in practice:
 **React Server Components is a new architecture that was introduced by React team and quickly adopted by Next.js**
 - This architecture introduces a new approach to create React components by dividing them into 2 distinct types: 
 * **Server Components**
-* Client Components  Server Components: 
-* By default Next.js treats all components as Server Components
-* These components can perform server-side tasks like reading files or fetching data directly from database
-* The trade-offs is that they can’t use React hooks or handle user interaction
+  * Client Components  Server Components: 
+  * By default Next.js treats all components as Server Components
+  * These components can perform server-side tasks like reading files or fetching data directly from database
+  * The trade-offs is that they can’t use React hooks or handle user interaction
 
 * **Client Components:**
-* To create Client Component, you will need to add “use client”  on the top of your component file.
-* While Client component can’t perform server side tasks like reading files but they can use hooks and handle the user interactions.
-* Client components are the traditional React components that we are familiar with in using React  React Server Components & Routing
-* As we get into routing, you will see practical examples of both  types
-* Work with server components that wait for certain operations to complete before rendering the content
-* Use client components to take advantage of hooks from the routing module.
+  * To create Client Component, you will need to add “use client”  on the top of your component file.
+  * While Client component can’t perform server side tasks like reading files but they can use hooks and handle the user interactions.
+  * Client components are the traditional React components that we are familiar with in using React  React Server Components & Routing
+  * As we get into routing, you will see practical examples of both  types
+  * Work with server components that wait for certain operations to complete before rendering the content
+  * Use client components to take advantage of hooks from the routing module.
+
+## routing
+- **Next.js has File-System based Routing**
+- URLs you can access based on how you organize your files and folders in your code.
+
+  ##### Routing conventions
+  - All routes must live inside the app folder
+  - Route files must be named eoith page.tsx or page.jsx
+  - Each folder represent a segment of the URL path
+  **When these conventions are followed it becomes automatically available as route.**
